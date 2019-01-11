@@ -2,9 +2,9 @@ class Item
 
   def initialize(type)
     @type = type
-    @price = {"apple" => "0.50",
-      "fish" => "2.00",
-      "bread" => "1.30"
+    @price = {"apple" => 1,
+      "fish" => 3,
+      "bread" => 2
     }
   end
 
