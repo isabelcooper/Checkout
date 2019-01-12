@@ -1,5 +1,4 @@
 require_relative 'item'
-require 'money'
 
 class Checkout
   attr_reader :basket, :total_price
@@ -14,11 +13,11 @@ class Checkout
     check_item_price(item)
   end
 
-  def format_money(total)
-    Money.new((total*100), "GBP").format
+  def print_basket_price
+    format_money(@total_price)
   end
 
-private
+  private
 
   def check_item_price(item)
     Item.new(item).return_price
@@ -29,4 +28,7 @@ private
     @total_price += check_item_price(item)
   end
 
+  def format_money(total)
+    '£' + (total * 100).to_s.insert(-3, '.')
+  end
 end
