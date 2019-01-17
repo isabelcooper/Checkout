@@ -1,15 +1,16 @@
 require 'item'
 
 describe Item do
-  # it 'should return price of item on return_price' do
-  #   item = Item.new
-  #   expect(item.return_price).to eq 5
-  # end
+  let(:apple_item) { Item.new('apple') }
+  let(:fish_item)  { Item.new('fish') }
 
-  it 'should return prices from a hash for different items' do
-    apple = Item.new('apple')
-    expect(apple.return_price).to eq 1
-    fish = Item.new('fish')
-    expect(fish.return_price).to eq 3
+  it 'should return the correct price for each item' do
+    expect(apple_item.price).to eq 1
   end
+
+  it 'should return the correct price for each item' do
+    expect(fish_item.price).to eq 3
+  end
+
+
 end

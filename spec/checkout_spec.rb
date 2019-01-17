@@ -1,32 +1,31 @@
 require 'checkout'
 
 describe Checkout do
-  before(:all) do
-    @checkout = Checkout.new
-    Checkout.send(:public, *Checkout.private_instance_methods)
+
+  let(:item_fish) { double(:item_fish, type: "fish", price: 3) }
+  let(:item_class) { double(:item_class, new: item_fish) }
+  let(:subject) { Checkout.new }
+
+  describe '#scan_item' do
+
+    it 'should return price of item on price' do
+      expect(subject.scan_item(item_fish)).to eq 3
+    end
+
+    it 'should add item to basket' do
+      subject.scan_item(item_fish)
+      expect(subject.basket).to include(item_fish)
+    end
+
   end
 
-  it 'should be able to scan an item and return price' do
-    expect(@checkout.scan_item('apple')).to eq 1
+  describe '#print_basket_price' do
+
+    it 'should return the formated basket total' do
+      subject.scan_item(item_fish)
+      expect(subject.print_basket_price).to eq "£3.00" 
+    end
   end
 
-  it 'should store all the scanned items in an array' do
-    expect(@checkout.basket).to be_a Array
-  end
 
-  it 'should total the price of stored items' do
-    2.times { @checkout.scan_item('apple') }
-    expect(@checkout.total_price).to eq 3
-    2.times { @checkout.scan_item('fish') }
-    expect(@checkout.total_price).to eq 9
-  end
-
-  it 'should reformat price' do
-    total = @checkout.total_price
-    expect(@checkout.format_money(total)).to eq "£9\.00"
-  end
-
-  it 'should return full basket price' do
-    expect(@checkout.print_basket_price).to eq "£9\.00"
-  end
 end

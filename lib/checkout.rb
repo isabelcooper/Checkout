@@ -17,10 +17,10 @@ class Checkout
     format_money(@total_price)
   end
 
-  private
+  #private
 
   def check_item_price(item)
-    Item.new(item).return_price
+    item.price
   end
 
   def add_to_basket(item)
